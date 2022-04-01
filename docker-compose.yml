@@ -1,0 +1,21 @@
+version: '3.1'
+
+services:
+  config:
+    image: hyness/spring-cloud-config-server:3.1.1-jre8
+    ports:
+      - 0:8888
+    volumes:
+      - "./cloudconfig-files:/config:ro"
+    environment:
+      - SPRING_PROFILES_ACTIVE=native
+  
+  microanut-app:
+    image: native-config-demo:latest
+    depends_on: 
+      - config
+    environment:
+      - MICRONAUT_ENVIRONMENTS=production
+      - CONFIG_HOST=config
+    ports:
+      - 8080:8080

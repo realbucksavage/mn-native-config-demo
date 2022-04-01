@@ -1,0 +1,22 @@
+micronaut:
+  config-client:
+    enabled: true
+  application:
+    name: native-config-demo
+netty:
+  default:
+    allocator:
+      max-order: 3
+eureka:
+  client:
+    registration:
+      enabled: false
+    defaultZone: ${EUREKA_HOST:localhost}:${EUREKA_PORT:8761}
+
+
+spring:
+  cloud:
+    config:
+      format: YAML
+      uri: http://${CONFIG_HOST:localhost}:${CONFIG_PORT:8888}
+      enabled: true
